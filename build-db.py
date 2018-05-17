@@ -28,6 +28,7 @@ if len(sys.argv) == 3:
                 lat real,
                 long real,
                 cruise integer,
+                country text,
                 probe integer,
                 training integer,
                 """
@@ -145,8 +146,8 @@ if len(sys.argv) == 3:
         else:
             good += 1
 
-        query = "INSERT INTO " + sys.argv[2] + " (raw, truth, uid, year, month, day, time, lat, long, cruise, probe) values (?,?,?,?,?,?,?,?,?,?,?);"
-        values = (p['raw'], p['truth'], p['uid'], p['year'], p['month'], p['day'], p['time'], p['latitude'], p['longitude'], p['cruise'], p['probe_type'])
+        query = "INSERT INTO " + sys.argv[2] + " (raw, truth, uid, year, month, day, time, lat, long, cruise, country, probe) values (?,?,?,?,?,?,?,?,?,?,?,?);"
+        values = (p['raw'], p['truth'], p['uid'], p['year'], p['month'], p['day'], p['time'], p['latitude'], p['longitude'], p['cruise'], profile.primary_header['Country code'], p['probe_type'])
         main.dbinteract(query, values)
         if profile.is_last_profile_in_file(fid) == True:
             break
